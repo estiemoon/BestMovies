@@ -2,8 +2,10 @@ const express = require('express');
 const app = express();
 
 const awardRouter = require('./routes/awards');
+const userRouter = require('./routes/users');
 
 app.use('/awards', awardRouter);
+app.use('/users', userRouter);
 
 
 
