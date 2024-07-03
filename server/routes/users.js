@@ -14,6 +14,5 @@ router.post('/login', loginController);
 
 //refresh
 router.post('/refresh', execRefresh);
-//logout?
 
 module.exports = router;
