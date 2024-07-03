@@ -1,33 +1,35 @@
-const {verify} = require('../middleware/jwt-utils');
+const {StatusCodes} = require('http-status-codes');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 
-const auth = (req,res) => {
-    const token = req.headers.authorization;
-    console.log(token)
+const ensureAuthorization = (req,res,next) => {
+    try{
+        const receivedToken = req.headers.authorization;
 
-    if(!token){
-        res.status(401).json({
-            message : 'token이 존재하지 않습니다. Unauthorized'
-        })
-    } else {
-        try{
-            const user = verify(token);
-            if(user){
-                req.user = user;
-                next();
-            } else {
-                return res.status(401).json({
-                    message : 'Unauthorized2'
-                })
-            }
-        } catch(err) {
-            return res.status(401).json({
-                err : err,
-                message : 'Unauthorized3'
+        if (receivedToken) {
+            const user = jwt.verify(receivedToken, process.env.JWT_SECRET)
+            req.isAuthenticated = true;
+            req.user = user;
+            next();
+        } else {
+            throw new ReferenceError('jwt must be provided!')
+        }
+    } catch (err) {
+        req.isAuthenticated = false;
+        if (err instanceof jwt.TokenExpiredError) {
+            return res.status(StatusCodes.UNAUTHORIZED).json({
+                message : "로그인 세션 만료. 다시 로그인 하세요."
             })
+        } else if (err instanceof jwt.JsonWebTokenError) {
+            return res.status(StatusCodes.BAD_REQUEST).json({
+                message : "잘못된 토큰입니다."
+            })
+        } else if (err instanceof ReferenceError) {
+            next();
         }
     }
-
 }
 
 
-module.exports = {auth};
+module.exports = {ensureAuthorization};
