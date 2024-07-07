@@ -1,7 +1,4 @@
 import React, { FC } from 'react';
-import { useTypedDispatch } from '../../hooks/redux';
-import { setModalActive } from '../../store/slices/boardSlice';
-import { setModalData } from '../../store/slices/modalSlice';
 import { IList, IMovieList } from '../../types';
 import { Task } from '../Task/Task';
 import { movie } from '../Task/Task.css';
@@ -17,25 +14,15 @@ export const List: FC<TListProps> = ({
     list,
     onMovieClick
 }) => {
-    const dispatch = useTypedDispatch();
-
-    const handleTaskChange = (listId: string, movie: IMovieList) => {
-        dispatch(setModalData({
-            boardId,
-            listId,
-            movieModal: movie
-        }));
-        dispatch(setModalActive(true));
-    }
-
+    
     return (
         <div className={movie}>
             {list.movieList.map((mv) => (
                 <div
                     key={mv.movId}
-                    onClick={() => onMovieClick(list.listId, mv)} // Pass directly to parent handler
+                    onClick={() => onMovieClick(list.listId, mv)}
                 >
-                    <Task
+                    <Task //각각의 태스크 - 각각의 영화
                         taskName={mv.movName}
                         taskDescription={mv.movDes}
                         taskImg={mv.movImg}

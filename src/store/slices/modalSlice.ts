@@ -8,9 +8,9 @@ type TModalState = {
     movieModal: IMovieList;
 }
 
-const initialState: TModalState = {
+const initialState: TModalState = { //기본 State
     modalActive: false,
-    boardId: '', // Default to empty strings or null
+    boardId: '',
     listId: '',
     movieModal: {
         movId: '',
@@ -24,9 +24,11 @@ const modalSlice = createSlice({
     name: 'modal',
     initialState,
     reducers: {
+        //modalActive의 값을 boolean 형태의 전달받은 값으로 변경
         setModalActive: (state, { payload }: PayloadAction<boolean>) => {
             state.modalActive = payload;
         },
+        //modal의 Data를 전달받은 객체의 값으로 변경
         setModalData: (state, { payload }: PayloadAction<{ boardId: string; listId: string; movieModal: IMovieList }>) => {
             state.boardId = payload.boardId;
             state.listId = payload.listId;

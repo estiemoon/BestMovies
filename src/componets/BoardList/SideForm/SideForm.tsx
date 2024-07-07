@@ -11,11 +11,13 @@ export const SideForm :FC<TSideFormProps> = ({
 }) => {
   const [inputText, setInputText] = useState('');
   const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
-    setInputText(e.target.value);
+    setInputText(e.target.value); //사용자가 검색한 검색어
   }
   const handleClick = () => {
-    if(inputText){
+    if(inputText){ //사용자가 입력한 텍스트
       //검색 아이콘 클릭 이벤트 (영화 검색)
+      //SideForm에서 handleClick 이벤트 발생 시
+      //ListContainer의 상태를 업데이트?
     }
   }
   return (

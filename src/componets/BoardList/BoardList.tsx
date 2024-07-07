@@ -26,10 +26,10 @@ export const BoardList : FC<TBoardListProps>= ({
       </div>
       {boardArray.map((board, index)=>(
         <div key = {board.boardId}
-        onClick = {()=> setActiveBoardId(boardArray[index].boardId)}
+        onClick = {()=> setActiveBoardId(boardArray[index].boardId)} 
         className={
           clsx(
-            {
+            { //조건부 -> clsx를 사용해서 동적 클래스 설정 -> 아이템 활성 상태에 따른 스타일 적용
               [boardItemActive]:
               boardArray.findIndex(b=>b.boardId===activeBoardId)===index
             },
@@ -41,7 +41,7 @@ export const BoardList : FC<TBoardListProps>= ({
         }
         >
           <div>
-            {board.boardName}
+            {board.boardName} {/*각 board 출력*/}
           </div>
         </div>
       ))}

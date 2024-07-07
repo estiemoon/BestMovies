@@ -24,7 +24,7 @@ export const EditModal = () => {
       dispath(setModalActive(false));
   }
 
-  useEffect(()=>{
+  useEffect(()=>{ //editingState 변수가 변경될 때마다 실행
     setData(editingState);
   }, [editingState]);
 
@@ -33,11 +33,14 @@ export const EditModal = () => {
     <div className={wrapper}>
         <div className={modalWindow}>
             <div className={header}>
+              {/*선택된 영화 이름*/}
                 <div className={title}>{data.movieModal.movName}</div>
                 <FiX className={closeButton} onClick={handleCloseButton}/>
             </div>
             <div className={set2}>
+              {/*나중에 DB 이미지 경로 수정 필요 */}
             <img className={imgEdit} src={insideOutImage}/>
+            {/*선택된 영화 Description */}
               {data.movieModal.movDes}
             </div>
             <div className={set1}>나중에 여기 별점이랑 후기 추가</div>

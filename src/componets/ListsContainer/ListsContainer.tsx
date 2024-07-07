@@ -18,23 +18,24 @@ export const ListsContainer:FC<TListContainerProps> = ({
 }) => {
     const dispatch = useTypedDispatch();
 
+    //영화 선택시
     const handleMovieClick = (listId :string, movie:IMovieList)=>{
-        dispatch(setModalData({
+        dispatch(setModalData({ //모달에 들어갈 값 설정
             boardId,
             listId,
             movieModal : movie
         }));
-        dispatch(setModalActive(true));
+        dispatch(setModalActive(true)); //ModalActive를 true로 설정
     }
 
     return (
         <div className={board}>
             {lists.map(list => (
-                <List
+                <List // 메인 영화 페이지
                     key={list.listId}
                     list={list}
                     boardId={boardId}
-                    onMovieClick={handleMovieClick} // Pass handler to List component
+                    onMovieClick={handleMovieClick} //영화 클릭 시 발생 이벤트
                 />
             ))}
         </div>
