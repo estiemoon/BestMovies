@@ -2,40 +2,38 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IMovieList } from "../../types/index";
 
 type TModalState = {
-    boardId : string;
-    listId : string;
-    movieModal : IMovieList;
+    modalActive: boolean;
+    boardId: string;
+    listId: string;
+    movieModal: IMovieList;
 }
 
-type TSetModalDataAction = {
-    boardId : string;
-    listId : string;
-    movieModal : IMovieList;
-}
-
-const initialState : TModalState= {
-    boardId: "board-0 ",
-    listId: 'list-0',
+const initialState: TModalState = {
+    modalActive: false,
+    boardId: '', // Default to empty strings or null
+    listId: '',
     movieModal: {
-        movId: 'movie-0',
-        movName: '인사이드 아웃',
-        movDes: '해외 영화, 디즈니-픽사에서 만들었으며, 2024년에 개봉한 영화',
-        movImg: '../../assets/insideout.png',
+        movId: '',
+        movName: '',
+        movDes: '',
+        movImg: '',
     }
 }
 
 const modalSlice = createSlice({
-    name : 'modal',
+    name: 'modal',
     initialState,
-    reducers :{
-        setModalData : (state, {payload} : PayloadAction<TSetModalDataAction>) => {
+    reducers: {
+        setModalActive: (state, { payload }: PayloadAction<boolean>) => {
+            state.modalActive = payload;
+        },
+        setModalData: (state, { payload }: PayloadAction<{ boardId: string; listId: string; movieModal: IMovieList }>) => {
             state.boardId = payload.boardId;
             state.listId = payload.listId;
-            //state.movieModal = payload.movieModal;
-            //영화에 대한 상태 업데이트가 안 돼서 일단 인사이드 아웃만
-        }
+            state.movieModal = payload.movieModal;
+        },
     }
 })
 
-export const {setModalData} = modalSlice.actions;
+export const { setModalActive, setModalData } = modalSlice.actions;
 export const modalReducer = modalSlice.reducer;

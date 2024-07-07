@@ -169,9 +169,13 @@ const initialState : TBoardState = {
 const boardsSlice = createSlice({
     name : 'boards',
     initialState,
+    //reducers : redux 상태를 변경하는 액션 생성자 함수를 정의하는 곳
     reducers : {
         setModalActive : (state, {payload}:PayloadAction<boolean>)=>{
-            state.modalActive = payload
+            //state : 현재 Redux 상태 객체
+            //payload : 액션 호출 시 전달된 인수를 포함하는 객체
+            state.modalActive = payload 
+            //modalActive값을 전달받은 boolean 타입의 (payload)값으로 변경
         },
     }
 })

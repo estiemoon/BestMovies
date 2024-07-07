@@ -1,50 +1,50 @@
-import React from 'react'
+import React, { FC } from 'react';
 import { useTypedDispatch } from '../../hooks/redux';
 import { setModalActive } from '../../store/slices/boardSlice';
 import { setModalData } from '../../store/slices/modalSlice';
-import { IMovieList } from '../../types';
-import { Task } from '../Task/Task'
-import { description, movie, title } from '../Task/Task.css'
+import { IList, IMovieList } from '../../types';
+import { Task } from '../Task/Task';
+import { movie } from '../Task/Task.css';
 
 type TListProps = {
-    boardId : string;
-    list : IList;
- }
+    boardId: string;
+    list: IList;
+    onMovieClick: (listId: string, movie: IMovieList) => void;
+}
 
-export const List :FC<TListProps> = ({
+export const List: FC<TListProps> = ({
+    boardId,
     list,
-    boardId
+    onMovieClick
 }) => {
     const dispatch = useTypedDispatch();
-    
-    const handleTaskChange=(
-        boardId :string,
-        listId : string,
-        movieModal:IMovieList
-    ) =>{
-        dispatch(setModalData({boardId,listId,movieModal}));
+
+    const handleTaskChange = (listId: string, movie: IMovieList) => {
+        dispatch(setModalData({
+            boardId,
+            listId,
+            movieModal: movie
+        }));
         dispatch(setModalActive(true));
     }
 
-  return (
-    <div>
+    return (
         <div className={movie}>
-            {list.movieList.map((mv, index)=>(
-                <div 
-                onClick={() => handleTaskChange(boardId,list.listId,mv.movId)}
-                key={mv.movId}>
-                    <Task 
+            {list.movieList.map((mv) => (
+                <div
+                    key={mv.movId}
+                    onClick={() => onMovieClick(list.listId, mv)} // Pass directly to parent handler
+                >
+                    <Task
                         taskName={mv.movName}
                         taskDescription={mv.movDes}
                         taskImg={mv.movImg}
-                        boardId = {boardId}
+                        boardId={boardId}
                         id={mv.movId}
-                        index={index}
+                        index={list.movieList.indexOf(mv)}
                     />
                 </div>
             ))}
         </div>
-       
-    </div>
-  )
+    );
 }

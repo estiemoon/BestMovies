@@ -1,6 +1,9 @@
 import React, { FC } from 'react'
 import { board } from '../../App.css';
-import { IList } from '../../types';
+import { useTypedDispatch } from '../../hooks/redux';
+import { setModalActive } from '../../store/slices/boardSlice';
+import { setModalData } from '../../store/slices/modalSlice';
+import { IList, IMovieList } from '../../types';
 import { List } from '../List/List';
 
 
@@ -13,16 +16,27 @@ export const ListsContainer:FC<TListContainerProps> = ({
     lists,
     boardId
 }) => {
-return (
- <div className={board}>
-    {
-        lists.map(list=>(
-            <List
-            key={list.listId}
-            list={list}
-            boardId={boardId}/>
-        ))
+    const dispatch = useTypedDispatch();
+
+    const handleMovieClick = (listId :string, movie:IMovieList)=>{
+        dispatch(setModalData({
+            boardId,
+            listId,
+            movieModal : movie
+        }));
+        dispatch(setModalActive(true));
     }
- </div>
-)
+
+    return (
+        <div className={board}>
+            {lists.map(list => (
+                <List
+                    key={list.listId}
+                    list={list}
+                    boardId={boardId}
+                    onMovieClick={handleMovieClick} // Pass handler to List component
+                />
+            ))}
+        </div>
+    );
 }
