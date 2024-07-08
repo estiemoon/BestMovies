@@ -22,7 +22,7 @@ function App() {
     <div>
       <div className={appContainer}>
         {modalActive ? <EditModal/> : null} {/*modalActive가 true이면 EditModal */}
-        <BoardList 
+        <BoardList //상단 Board
           activeBoardId= {activeBoardId}
           setActiveBoardId = {setActiveBoardId}/>
           

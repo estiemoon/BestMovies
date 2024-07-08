@@ -59,12 +59,15 @@ export const input = style({
     marginBottom : vars.spacing.big2,
     padding : vars.spacing.medium,
     fontSize : vars.fontSizing.T4,
-    boxShadow : vars.shadow.basic
+    boxShadow : vars.shadow.basic,
 })
 
 export const set1 = style({
-    width : 'max-content',
-    height : 'max-content',
+    borderRadius : '30px',
+    alignContent : 'center',
+    backgroundColor : vars.color.secondaryDarkTextHover,
+    width : '100%',
+    height : '100%',
     marginTop : '10px',
     alignItems:'center',
 })
@@ -74,11 +77,12 @@ export const set2 = style({
     flexDirection : 'row',
     marginBottom:"40px",
     
+    
 })
 
 
-export const imgEdit = style({
-    width:"300px",
-    height:'500px',
-    marginRight:'50px'
+export const edit = style({
+    width:"50%",
+    height:'100%',
+    margin :'10px'
 })

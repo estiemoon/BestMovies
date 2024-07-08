@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { FiX } from 'react-icons/fi';
 import { useTypedDispatch, useTypedSelector } from '../../hooks/redux';
 import { setModalActive } from '../../store/slices/boardSlice';
-import { closeButton, header, imgEdit, modalWindow, set1, set2, title, wrapper } from './EditModal.css'
-import insideOutImage from '../../assets/insideout.png'; // 이미지 절대경로
+import { closeButton, edit, header, imgEdit, modalWindow, set1, set2, title, wrapper } from './EditModal.css'
+import imageEx from '../../assets/image.png'; // 이미지 절대경로
 
 
 export const EditModal = () => {
@@ -29,6 +29,8 @@ export const EditModal = () => {
   }, [editingState]);
 
 
+
+  const imgSrc = data.movieModal.movImg;
   return (
     <div className={wrapper}>
         <div className={modalWindow}>
@@ -39,9 +41,11 @@ export const EditModal = () => {
             </div>
             <div className={set2}>
               {/*나중에 DB 이미지 경로 수정 필요 */}
-            <img className={imgEdit} src={insideOutImage}/>
+  
+              <img className={edit} src={imageEx} />
             {/*선택된 영화 Description */}
-              {data.movieModal.movDes}
+              <div className={edit}>{data.movieModal.movDes}</div>
+              
             </div>
             <div className={set1}>나중에 여기 별점이랑 후기 추가</div>
         </div>

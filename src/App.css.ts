@@ -17,7 +17,8 @@ export const vars = createGlobalTheme(":root",{
         selectedTab : "rgb(137,176,174)",
         updateButton : "rgb(237,180,88)",
         deleteButton : "rgb(237,51,88)",
-        textDark : "#495057"
+        textDark : "#495057",
+        modalColor : '#DCDCDC'
     },
     fontSizing:{
         T1 : "32px",
