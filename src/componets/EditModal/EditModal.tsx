@@ -42,7 +42,7 @@ export const EditModal = () => {
             <div className={set2}>
               {/*나중에 DB 이미지 경로 수정 필요 */}
   
-              <img className={edit} src={imageEx} />
+              <img className={edit} src={data.movieModal.movImg} />
             {/*선택된 영화 Description */}
               <div className={edit}>{data.movieModal.movDes}</div>
               

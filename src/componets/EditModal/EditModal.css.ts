@@ -70,6 +70,8 @@ export const set1 = style({
     height : '100%',
     marginTop : '10px',
     alignItems:'center',
+    color : "#808080",
+    fontSize : vars.fontSizing.T3,
 })
 
 export const set2 = style({
@@ -83,6 +85,6 @@ export const set2 = style({
 
 export const edit = style({
     width:"50%",
-    height:'100%',
+    height:'80%',
     margin :'10px'
 })

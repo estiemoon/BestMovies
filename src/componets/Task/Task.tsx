@@ -23,7 +23,7 @@ export const Task : FC<TTaskProps>= ({
   return (
     <div className={container}>
       <div>
-        <img className={imgSet} src={imageEx}></img>
+        <img className={imgSet} src={taskImg}></img>
         <div className={title}>{taskName}</div>
       </div>
     </div>

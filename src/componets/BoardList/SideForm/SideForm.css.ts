@@ -25,8 +25,8 @@ export const icon = style({
 
 export const imgSet = style({
     borderRadius : '30px',
-    width : '100%',
-    height : '100%',
+    width : '300px',
+    height : '400px',
 })
 
 export const searchSet = style({

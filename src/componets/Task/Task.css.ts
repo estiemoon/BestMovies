@@ -37,5 +37,5 @@ export const movie = style({
 
 export const imgSet = style({
     width : '300px',
-    height : '300px'
+    height : '400px'
 })
