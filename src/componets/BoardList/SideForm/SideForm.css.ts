@@ -23,3 +23,40 @@ export const icon = style({
     }
 })
 
+export const imgSet = style({
+    borderRadius : '30px',
+    width : '100%',
+    height : '100%',
+})
+
+export const searchSet = style({
+    color : "#808080",
+    margin : '30px',
+    display : 'flex',
+    flexDirection : 'row',
+    backgroundColor : vars.color.secondaryDarkTextHover,
+    borderRadius : '30px',
+
+})
+
+export const textSet = style({
+    margin : '30px',
+    display : 'flex',
+    flexDirection : 'column'
+    
+})
+
+
+export const titleText = style({
+    width : '99%',
+    fontSize:vars.fontSizing.T1,
+})
+
+export const closeIcon = style({
+    fontSize:vars.fontSizing.T1,
+})
+
+export const container = style({
+    display : 'flex',
+    flexDirection : 'column'
+})

@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { container, description, imgSet, movie, title } from './Task.css';
 import imageEx from '../../assets/image.png'; // 이미지 절대경로
 
+
 type TTaskProps = {
   index : number;
   id : string;

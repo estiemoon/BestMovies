@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FiX } from 'react-icons/fi';
 import { useTypedDispatch, useTypedSelector } from '../../hooks/redux';
 import { setModalActive } from '../../store/slices/boardSlice';
-import { closeButton, edit, header, imgEdit, modalWindow, set1, set2, title, wrapper } from './EditModal.css'
+import { closeButton, edit, header, modalWindow, set1, set2, title, wrapper } from './EditModal.css'
 import imageEx from '../../assets/image.png'; // 이미지 절대경로
 
 
