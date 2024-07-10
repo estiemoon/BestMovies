@@ -30,14 +30,12 @@ export const movie = style({
     display :'flex',
     flexWrap : 'wrap',
     gap: '30px',
-    minWidth: '30vh', // 최소 너비 지정
-    minHeight: '30vh', // 최소 너비 지정
+    width : '100%',
+    height : '100%',
 })
 
 
 export const imgSet = style({
-    width:"100%",
-    height:'100%',
-    maxHeight:'500px'
+    width : '300px',
+    height : '400px'
 })
-
