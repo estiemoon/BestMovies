@@ -5,6 +5,9 @@ import { addSection, boardItem, boardItemActive, container, title } from './Boar
 import clsx from 'clsx';
 import { IBoard, IList, IMovieList } from '../../types'; // Import your types
 
+import { Link, Route, Routes } from "react-router-dom";
+import LoginBox from '../../login';
+
 type TBoardListProps = {
   activeBoardId: string;
   setActiveBoardId: React.Dispatch<React.SetStateAction<string>>;
@@ -55,6 +58,8 @@ export const BoardList: FC<TBoardListProps> = ({ activeBoardId, setActiveBoardId
       ))}
 
       <div className={addSection}>
+        <Link to="/login">Login</Link>
+        <Link to ="/register">Register</Link>
         <SideForm
           inputRef={inputRef}
           onSearch={handleSearch}
