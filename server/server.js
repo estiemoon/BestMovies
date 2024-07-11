@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+app.use(cors());
 
 const awardRouter = require('./routes/awards');
 const userRouter = require('./routes/users');
