@@ -1,30 +1,98 @@
-# React + TypeScript + Vite
+### BestMovies
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+# Back
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 1. ERD
 
-## Expanding the ESLint configuration
+- MOVIE는 오픈 API로 받아올 것
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+```mermaid
+erDiagram
 
-- Configure the top-level `parserOptions` property like this:
+    USER ||--o{ BOOKMARK : ""
+    USER ||--o{ REVIEW : ""
+    MOVIE ||--o{ BOOKMARK : ""
+    MOVIE ||--o{ REVIEW : ""
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+    USER {
+        id integer PK
+        username varchar
+        email varchar
+        salt varchar
+        hashPwd varchar
+        refresh varchar
+    }
+
+    AWARD_MOVIE {
+        id integer PK
+        award_title varchar
+        title varchar
+        year varchar
+        winner varchar
+        award varchar
+    }
+
+    MOVIE {
+        id integer PK
+    }
+
+    BOOKMARK {
+        id integer PK
+        user_id integer FK
+        movie_id integer FK
+    }
+
+    REVIEW {
+        id integer PK
+        user_id integer FK
+        movie_id integer FK
+        comments varchar
+        rate integer
+    }
+
+
+
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## 2. API 설계
+
+### 수상작 영화 API
+
+- DB에 담아놓은 영화 데이터 가져오기
+- `GET`
+- '/awards'
+- `Request Query` = {year, award}
+- `Response Body` = [ {
+  "id": 1,
+  "award_title": "황금종려상",
+  "title": "아노라",
+  "year": "2024",
+  "winner": "션 베이커",
+  "award": "cannes"
+  }, ...]
+
+### USER API
+
+회원가입
+
+- `POST`
+- '/users/join'
+- `Request Body` = {username, email, password}
+
+로그인
+
+- `POST`
+- '/users/join'
+- `Request Body` = {email, password}
+
+### BOOKMARK API
+
+- `POST` `DELETE`
+
+### REVIEW API
+
+`POST` `DELETE`
+
+## 3. Authorization
