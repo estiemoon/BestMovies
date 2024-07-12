@@ -1,4 +1,3 @@
-
 # Logs
 logs
 *.log
@@ -26,3 +25,4 @@ dist-ssr
 .env
 busan_awards.json
 /node_modules
+

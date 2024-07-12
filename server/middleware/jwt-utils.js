@@ -13,7 +13,7 @@ module.exports = {
             },
             process.env.JWT_SECRET,
             {
-                expiresIn : '1 mins',
+                expiresIn : '15 mins',
                 issuer : 'moon'
             })
         },
