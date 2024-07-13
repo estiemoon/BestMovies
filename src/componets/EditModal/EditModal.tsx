@@ -17,8 +17,10 @@ export const EditModal = () => {
   };
 
   const addBookMarkButton = () => {
+    const uniqueMovId = `bookmark-${data.movieModal.movId}-${Date.now()}`;
+
     const movieToAdd = {
-      movId: `movie-${data.movieModal.movId}`,
+      movId: uniqueMovId,
       movName: data.movieModal.movName,
       movDes: data.movieModal.movDes,
       movImg: data.movieModal.movImg,
