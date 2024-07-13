@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { boardContiner, boxContainer, customHomeLink, customHomeLinkContainer, formContainer, loginContainer, loginTitle, loginTitle2 } from "./login.css";
 
 const RegisterBox = () => {
 
@@ -36,17 +37,24 @@ const RegisterBox = () => {
 
 
     return (
+
         <div>
-        <h2>Register</h2>
-        <div>
-            <Link to="/">Home</Link>
-        </div>
-        <form>
-            <input onChange={getUsername} type="text" placeholder="Username" />
-            <input onChange={getEmail} type="email" placeholder="Email" />
-            <input onChange={getPassword} type="password" placeholder="Password" />
-            <input onClick={handleSubmit} type="submit" value="Register" />
-        </form>
+            <div className={boardContiner}>
+                <div className={loginTitle}>BestMovie</div>
+                <div className={customHomeLinkContainer}>
+                    <Link to="/" className={customHomeLink}>Home</Link>
+                </div>
+            </div>
+            
+            <div className={loginContainer}>
+                <div className={loginTitle2}>Register</div>
+                <form className={formContainer}>
+                    <input className={boxContainer} onChange={getUsername} type="text" placeholder=" Username" />
+                    <input className={boxContainer} onChange={getEmail} type="email" placeholder=" Email" />
+                    <input className={boxContainer} onChange={getPassword} type="password" placeholder=" Password" />
+                    <input className={boxContainer} onClick={handleSubmit} type="submit" value="회원가입" />
+                </form>
+            </div>
         </div>
     )
 }

@@ -7,14 +7,15 @@ import store from './store'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LoginBox from './login'
 import RegisterBox from './register'
+import { login } from './main.css'
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/login" element={<LoginBox />} />
+        <Route path="/" element={<App />}/>
+        <Route path="/login" element={ <LoginBox />}/>
         <Route path="/register" element={<RegisterBox />} />
       </Routes>
     </BrowserRouter>

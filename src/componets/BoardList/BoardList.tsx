@@ -1,7 +1,7 @@
 import React, { FC, useRef, useState } from 'react';
 import { useTypedSelector } from '../../hooks/redux';
 import { SideForm } from './SideForm/SideForm';
-import { addSection, boardItem, boardItemActive, container, title } from './BoardList.css';
+import { addSection, boardItem, boardItemActive, container, customLink, loginBox, loginBox_container, title } from './BoardList.css';
 import clsx from 'clsx';
 import { IBoard, IList, IMovieList } from '../../types'; // Import your types
 
@@ -38,6 +38,13 @@ export const BoardList: FC<TBoardListProps> = ({ activeBoardId, setActiveBoardId
     <div className={container}>
       <div className={title}>
         BestMovie
+        <div className={loginBox_container}>
+          <div className={loginBox}>
+          <Link to="/login" className={customLink}>Login</Link>
+          </div>
+          <div className={loginBox}>
+          <Link to ="/register" className={customLink}>Register</Link></div>
+        </div>
       </div>
       {boardArray.map((board, index) => (
         <div
@@ -56,10 +63,9 @@ export const BoardList: FC<TBoardListProps> = ({ activeBoardId, setActiveBoardId
           </div>
         </div>
       ))}
-
       <div className={addSection}>
-        <Link to="/login">Login</Link>
-        <Link to ="/register">Register</Link>
+      
+      
         <SideForm
           inputRef={inputRef}
           onSearch={handleSearch}
