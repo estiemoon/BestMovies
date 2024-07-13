@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { board } from '../../App.css';
 import { useTypedDispatch } from '../../hooks/redux';
 import { setModalActive } from '../../store/slices/boardSlice';

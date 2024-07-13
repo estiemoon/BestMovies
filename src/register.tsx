@@ -49,10 +49,10 @@ const RegisterBox = () => {
             <div className={loginContainer}>
                 <div className={loginTitle2}>Register</div>
                 <form className={formContainer}>
-                    <input className={boxContainer} onChange={getUsername} type="text" placeholder=" Username" />
-                    <input className={boxContainer} onChange={getEmail} type="email" placeholder=" Email" />
-                    <input className={boxContainer} onChange={getPassword} type="password" placeholder=" Password" />
-                    <input className={boxContainer} onClick={handleSubmit} type="submit" value="회원가입" />
+                    <input className={boxContainer} onChange={getUsername} type="text" placeholder="Username" />
+                    <input className={boxContainer} onChange={getEmail} type="email" placeholder="Email" />
+                    <input className={boxContainer} onChange={getPassword} type="password" placeholder="Password" />
+                    <input className={boxContainer} onClick={handleSubmit} type="submit" value="Register" />
                 </form>
             </div>
         </div>

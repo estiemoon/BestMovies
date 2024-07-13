@@ -14,7 +14,7 @@ export const container = style({
 })
 
 export const title = style({
-    
+    fontWeight:'bold',
     color : vars.color.brightText,
     fontSize : vars.fontSizing.T2,
     marginRight:vars.spacing.big1
@@ -26,6 +26,7 @@ export const boardItem = style({
     fontSize : vars.fontSizing.T3,
     padding:vars.spacing.medium,
     cursor : 'pointer',
+    fontWeight:'bold',
 })
 
 export const boardItemActive = style({
@@ -33,6 +34,7 @@ export const boardItemActive = style({
     fontSize : vars.fontSizing.T3,
     padding:vars.spacing.medium,
     cursor : 'pointer',
+    fontWeight:'bold',
 })
 
 export const addSection = style({

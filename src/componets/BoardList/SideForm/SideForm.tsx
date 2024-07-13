@@ -1,27 +1,43 @@
-import React, { FC, useRef, useState } from 'react';
-import { FaSearch, FaTimes } from 'react-icons/fa'; // Import FaTimes for close icon
+import React, { FC, useState } from 'react';
+import { FaSearch, FaTimes } from 'react-icons/fa';
 import { closeIcon, container, icon, imgSet, input, searchSet, sideForm, textSet, titleText } from './SideForm.css';
-import { IMovieList } from '../../types'; // Import IMovieList type
-import { Task } from '../../Task/Task';
+import { IMovieList } from '../../types';
+import { useTypedDispatch } from '../../../hooks/redux';
+import { setModalData } from '../../../store/slices/modalSlice';
+import { setModalActive } from '../../../store/slices/boardSlice';
 
 type TSideFormProps = {
   inputRef: React.RefObject<HTMLInputElement>;
-  onSearch: (searchText: string) => void; // Callback to pass search text to parent
-  filteredMovies: IMovieList[]; // Array of filtered movies to display
-  onClearMovie: (movId: string) => void; // Callback to clear a specific movie from filtered results
+  onSearch: (searchText: string) => void; 
+  filteredMovies: IMovieList[];
+  onClearMovie: (movId: string) => void; 
 }
 
 export const SideForm: FC<TSideFormProps> = ({ inputRef, onSearch, filteredMovies, onClearMovie }) => {
   const [inputText, setInputText] = useState('');
+  const dispatch = useTypedDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputText(e.target.value); //사용자 입력 검색어
+    setInputText(e.target.value); // 사용자 입력 검색어 업데이트
   }
 
   const handleClick = () => {
-    if (inputText) {
-      onSearch(inputText); //사용자가 검색 버튼 클릭 시 이벤트
-    }
+    if (inputText) onSearch(inputText); // 검색 버튼 클릭 시 검색어 전달
+  }
+
+  const handleOpenModal = (movie: IMovieList) => {
+    const boardId = 'board-0'; // 예시로 'board-0'을 사용
+    const listId = 'list-0';   // 예시로 'list-0'을 사용
+
+    // 모달 데이터 업데이트
+    dispatch(setModalData({
+      boardId,
+      listId,
+      movieModal: movie
+    }));
+
+    // 모달 활성화
+    dispatch(setModalActive(true));
   }
 
   return (
@@ -39,21 +55,20 @@ export const SideForm: FC<TSideFormProps> = ({ inputRef, onSearch, filteredMovie
       </div>
 
       <div>
-          {filteredMovies.map(movie => (
-              
-                <div className={searchSet}>
-                  <img className={imgSet} src={movie.movImg}/>
-                  <div className={textSet}>
-                    <div className={searchSet}>
-                      <div className={titleText}>{movie.movName}</div>
-                      <FaTimes className={closeIcon} onClick={() => onClearMovie(movie.movId)} /> {/* Close button for each movie */}
-                    </div>
-                    <div className={searchSet}>{movie.movDes}</div>
-                  </div>
-                </div>
-              
-            ))}
-        </div>
+        {filteredMovies.map(movieModal => (
+          <div key={movieModal.movId} className={searchSet}>
+            <img className={imgSet} src={movieModal.movImg} alt={movieModal.movName} />
+            <div className={textSet}>
+              <div className={searchSet}>
+                <div className={titleText}>{movieModal.movName}</div>
+                <FaSearch className={closeIcon} onClick={() => handleOpenModal(movieModal)} />
+                <FaTimes className={closeIcon} onClick={() => onClearMovie(movieModal.movId)} />
+              </div>
+              <div className={searchSet}>{movieModal.movDes}</div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
