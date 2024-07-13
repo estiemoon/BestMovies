@@ -1,7 +1,5 @@
-import React, { FC } from 'react'
-import { container, description, imgSet, movie, title } from './Task.css';
-import imageEx from '../../assets/image.png'; // 이미지 절대경로
-
+import { FC } from 'react'
+import {  container,  imgSet,  title } from './Task.css';
 
 type TTaskProps = {
   index : number;
@@ -13,13 +11,11 @@ type TTaskProps = {
 }
 
 export const Task : FC<TTaskProps>= ({
-  index,
-  id,
-  boardId,
   taskName,
-  taskDescription,
   taskImg
 }) => {
+
+
   return (
     <div className={container}>
       <div>

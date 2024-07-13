@@ -19,7 +19,8 @@ export const container = style({
 export const title = style({
     fontSize:vars.fontSizing.T4,
     fontWeight :'bold',
-    marginBottom : vars.spacing.small
+    marginBottom : vars.spacing.small,
+    textAlign:'center'
 })
 
 export const description = style({
@@ -39,3 +40,4 @@ export const imgSet = style({
     width : '300px',
     height : '400px'
 })
+

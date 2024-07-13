@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { IList, IMovieList } from '../../types';
 import { Task } from '../Task/Task';
 import { movie } from '../Task/Task.css';

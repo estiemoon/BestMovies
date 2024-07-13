@@ -22,4 +22,5 @@ export interface IMovieList {
     movName : string;
     movDes : string;
     movImg : string;
+    bookmarked:boolean;
 }
