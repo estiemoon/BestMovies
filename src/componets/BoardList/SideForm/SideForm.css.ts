@@ -54,6 +54,7 @@ export const titleText = style({
 
 export const closeIcon = style({
     fontSize:vars.fontSizing.T1,
+    marginRight:'10px'
 })
 
 export const container = style({

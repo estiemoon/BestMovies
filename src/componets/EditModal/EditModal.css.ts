@@ -14,8 +14,8 @@ export const wrapper = style({
 export const modalWindow = style({
     display:'flex',
     flexDirection:'column',
-    width:'80%',
-    height:'80%',
+    width:'900px',
+    height:'1000px',
     overflowY:"auto",
     backgroundColor:vars.color.mainDarker,
     opacity:0.95,
@@ -30,11 +30,22 @@ export const header = style({
     display:'flex',
     alignItems:"center",
     justifyContent:"center",
-    marginBottom:"40px"
+    marginBottom:"10px",
+    marginTop:'10px'
 })
 
 export const closeButton = style({
-    fontSize : vars.fontSizing.T2,
+    fontSize : vars.fontSizing.T1,
+    cursor : "pointer",
+    marginTop : "-20px",
+    ":hover":{
+        opacity:0.8
+    }
+})
+
+export const bookmarkImage = style({
+    fontSize:vars.fontSizing.T2,
+    marginRight:'10px',
     cursor : "pointer",
     marginTop : "-20px",
     ":hover":{
@@ -44,9 +55,9 @@ export const closeButton = style({
 
 export const title = style({
     fontSize : vars.fontSizing.T2,
-    color:vars.color.darkText,
+    color:"#ffffff",
+    fontWeight:'bold',
     marginRight : 'auto',
-    marginBottom : vars.spacing.medium
 })
 
 
@@ -77,14 +88,16 @@ export const set1 = style({
 export const set2 = style({
     display:'flex',
     flexDirection : 'row',
-    marginBottom:"40px",
-    
-    
+    marginBottom:"40px",   
 })
 
 
 export const edit = style({
     width:"50%",
     height:'80%',
-    margin :'10px'
+    margin :'10px',
+    fontSize : vars.fontSizing.T3,
+    color : '#ffffff',
+    fontWeight:'bold',
 })
+

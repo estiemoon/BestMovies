@@ -3,10 +3,8 @@ import { useTypedSelector } from '../../hooks/redux';
 import { SideForm } from './SideForm/SideForm';
 import { addSection, boardItem, boardItemActive, container, customLink, loginBox, loginBox_container, title } from './BoardList.css';
 import clsx from 'clsx';
-import { IBoard, IList, IMovieList } from '../../types'; // Import your types
-
-import { Link, Route, Routes } from "react-router-dom";
-import LoginBox from '../../login';
+import { IMovieList } from '../../types'; 
+import { Link } from "react-router-dom";
 
 type TBoardListProps = {
   activeBoardId: string;
@@ -18,17 +16,18 @@ export const BoardList: FC<TBoardListProps> = ({ activeBoardId, setActiveBoardId
   const inputRef = useRef<HTMLInputElement>(null);
   const [filteredMovies, setFilteredMovies] = useState<IMovieList[]>([]);
 
-  //사용자가 입력한 검색어를 이용하여 영화 검색
   const handleSearch = (searchText: string) => {
-    const allMovies: IMovieList[] = boardArray.flatMap(board => board.lists.flatMap(list => list.movieList));
-    const filtered = allMovies.filter(movie =>
-      movie.movName.includes(searchText)
-    );
-    setFilteredMovies(filtered);
+    const boardZero = boardArray.find(board => board.boardId === 'board-0');
+    if (boardZero) {
+      const filtered = boardZero.lists.flatMap(list => list.movieList.filter(movie =>
+        movie.movName.toLowerCase().includes(searchText.toLowerCase())
+      ));
+      setFilteredMovies(filtered);
+    } else {
+      setFilteredMovies([]);
+    }
   }
 
-
-  //검색한 결과 창을 지울 때 사용
   const handleClearMovie = (movId: string) => {
     const updatedMovies = filteredMovies.filter(movie => movie.movId !== movId);
     setFilteredMovies(updatedMovies);
@@ -40,10 +39,11 @@ export const BoardList: FC<TBoardListProps> = ({ activeBoardId, setActiveBoardId
         BestMovie
         <div className={loginBox_container}>
           <div className={loginBox}>
-          <Link to="/login" className={customLink}>Login</Link>
+            <Link to="/login" className={customLink}>Login</Link>
           </div>
           <div className={loginBox}>
-          <Link to ="/register" className={customLink}>Register</Link></div>
+            <Link to="/register" className={customLink}>Register</Link>
+          </div>
         </div>
       </div>
       {boardArray.map((board, index) => (
@@ -64,8 +64,6 @@ export const BoardList: FC<TBoardListProps> = ({ activeBoardId, setActiveBoardId
         </div>
       ))}
       <div className={addSection}>
-      
-      
         <SideForm
           inputRef={inputRef}
           onSearch={handleSearch}
@@ -76,5 +74,3 @@ export const BoardList: FC<TBoardListProps> = ({ activeBoardId, setActiveBoardId
     </div>
   )
 }
-
-
