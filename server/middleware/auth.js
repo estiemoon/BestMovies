@@ -11,7 +11,6 @@ const ensureAuthorization = (req,res,next) => {
             const user = jwt.verify(receivedToken, process.env.JWT_SECRET)
             req.isAuthenticated = true;
             req.user = user;
-            console.log('req.user:', req.user)
             next();
         } else {
             throw new ReferenceError('jwt must be provided!')

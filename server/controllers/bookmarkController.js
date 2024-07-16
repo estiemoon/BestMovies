@@ -1,52 +1,9 @@
 const {addBM, removeBM, showBM} = require('../services/bookmarkService');
-
-const addBMController = async (req, res) => {
-    if(!req.isAuthenticated) {
-        return res.status(401).json({
-            message : "로그인이 필요합니다."
-        })
-    } else{
-        const {movie_id} = req.body
-        try{
-            const result = await addBM(req.user.email, movie_id, res)
-            res.json({
-                message : "북마크 추가 성공!",
-                user : req.user.email,
-                movie: movie_id,
-                result : result,
-            })
-        } catch(err) {
-            console.log("addBMController err", err);
-            res.status(400).end();
-        }
-    }
-}
-
-const removeBMController = async (req,res) => {
-    if(!req.isAuthenticated) {
-        return res.status(401).json({
-            message : "로그인이 필요합니다."
-        })
-    } else {
-        const {movie_id} = req.body
-        try{
-            const result = await removeBM(req.user.email, movie_id, res)
-            res.json({
-                message : "북마크 삭제 성공!",
-                user : req.user.email,
-                movie: movie_id,
-                result : result,
-            })
-        } catch(err) {
-            console.log("removeBMController err", err);
-            res.status(400).end();
-    }
-}
-}
+const {StatusCodes} = require('http-status-codes');
 
 const showBMController = (req,res) => {
     if(!req.isAuthenticated) {
-        return res.status(401).json({
+        return res.status(StatusCodes.UNAUTHORIZED).json({
             message : "로그인이 필요합니다."
         })
     } else {
@@ -54,7 +11,51 @@ const showBMController = (req,res) => {
             showBM(req.user.email, res)
         } catch(err) {
             console.log("showBMController err", err);
-            res.status(400).end(); 
+            res.status(StatusCodes.BAD_REQUEST).end(); 
+    }
+}
+}
+
+const addBMController = async (req, res) => {
+    if(!req.isAuthenticated) {
+        return res.status(StatusCodes.UNAUTHORIZED).json({
+            message : "로그인이 필요합니다."
+        })
+    } else{
+        const {movie_id} = req.body
+        try{
+            const result = await addBM(req.user.email, movie_id, res)
+            res.status(StatusCodes.CREATED).json({
+                message : "북마크 추가 성공!",
+                user : req.user.email,
+                movie: movie_id,
+                result : result,
+            })
+        } catch(err) {
+            console.log("addBMController err", err);
+            res.status(StatusCodes.BAD_REQUEST).end();
+        }
+    }
+}
+
+const removeBMController = async (req,res) => {
+    if(!req.isAuthenticated) {
+        return res.status(StatusCodes.UNAUTHORIZED).json({
+            message : "로그인이 필요합니다."
+        })
+    } else {
+        const {movie_id} = req.body
+        try{
+            const result = await removeBM(req.user.email, movie_id, res)
+            res.status(StatusCodes.OK).json({
+                message : "북마크 삭제 성공!",
+                user : req.user.email,
+                movie: movie_id,
+                result : result,
+            })
+        } catch(err) {
+            console.log("removeBMController err", err);
+            res.status(StatusCodes.BAD_REQUEST).end();
     }
 }
 }

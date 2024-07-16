@@ -3,6 +3,7 @@ const router = express.Router();
 router.use(express.json());
 
 const conn = require('../db/mariadb');
+const {StatusCodes} = require('http-status-codes');
 
 //수상작 별, 연도 별 영화 조회
 
@@ -10,17 +11,27 @@ router.get('/',
     async (req,res) => {
         const { year, award } = req.query;
 
-        const sql = `SELECT * FROM award_movies
-                    WHERE year = ? AND award = ?`;
-        const values = [year, award]  
+        let sql = `SELECT * FROM award_movies`;
+        let values = [];
+
+        if (year && award){
+            sql += ` WHERE year = ? AND award = ?`;
+            values = [year, award]  
+        } else if (year) {
+            sql += ` WHERE year = ?`;
+            values = [year]
+        } else if (award) {
+            sql += ` WHERE award = ?`;
+            values = [award]
+        }
 
         try{
             const [result] = await (await conn).query(sql, values)
-            res.status(200).json(result);
+            res.status(StatusCodes.OK).json(result);
 
         } catch(err) {
             console.log("get awards error",err.name);
-            res.status(404).end();
+            res.status(StatusCodes.BAD_REQUEST).end();
         }
 })
 
