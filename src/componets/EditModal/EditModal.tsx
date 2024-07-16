@@ -29,7 +29,7 @@ export const EditModal = () => {
     };
 
     // API 요청을 보내 북마크 추가
-    fetch('https://c3c9335f-3319-42eb-b423-b4566d6f90b6.mock.pstmn.io/bookmarks', {
+    fetch('http://localhost:3000/bookmarks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ export const EditModal = () => {
 
   const removeBookMarkButton = () => {
     // API 요청을 보내 북마크 삭제
-    fetch(`https://c3c9335f-3319-42eb-b423-b4566d6f90b6.mock.pstmn.io/bookmarks`, {
+    fetch(`http://localhost:3000/bookmarks`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

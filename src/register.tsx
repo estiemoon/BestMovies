@@ -19,10 +19,9 @@ const RegisterBox = () => {
         setPassword(e.target.value);
     }
 
-    {/*http://localhost:3000/users/join */ }
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        axios.post('https://c3c9335f-3319-42eb-b423-b4566d6f90b6.mock.pstmn.io/users/join',
+        axios.post('http://localhost:3000/users/join',
             {
                 username: username,
                 email: email,

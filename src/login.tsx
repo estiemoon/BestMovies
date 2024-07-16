@@ -41,7 +41,7 @@ const LoginBox = () => {
     const handleLoginBtn = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://c3c9335f-3319-42eb-b423-b4566d6f90b6.mock.pstmn.io/users/login',
+            const response = await axios.post('http://localhost:3000/users/login',
                 {
                     email: email,
                     password: password

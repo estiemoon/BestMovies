@@ -39,7 +39,7 @@ export const BoardList: FC<TBoardListProps> = ({ activeBoardId, setActiveBoardId
   useEffect(() => {
     // activeBoardId가 'board-1'일 때만 데이터를 가져오도록 설정
     if (activeBoardId === 'board-1') {
-      fetch('https://c3c9335f-3319-42eb-b423-b4566d6f90b6.mock.pstmn.io/awards')
+      fetch('http://localhost:3000/awards')
         .then(response => {
           if (!response.ok) {
             throw new Error('Failed to fetch data');
@@ -71,7 +71,7 @@ export const BoardList: FC<TBoardListProps> = ({ activeBoardId, setActiveBoardId
     }
 
     else if (activeBoardId === 'board-2') {
-      fetch('https://c3c9335f-3319-42eb-b423-b4566d6f90b6.mock.pstmn.io/booklist', {
+      fetch('http://localhost:3000/booklist', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
