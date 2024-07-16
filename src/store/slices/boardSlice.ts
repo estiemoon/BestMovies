@@ -94,6 +94,7 @@ const initialState : TBoardState = {
                             movImg : parasite,
                             bookmarked: false
                         },
+                        
                     ]
                 }
             ]
@@ -128,6 +129,11 @@ const boardsSlice = createSlice({
             //modalActive값을 전달받은 boolean 타입의 (payload)값으로 변경
         },
 
+        addAwardsBoard: (state, { payload }: PayloadAction<IMovieList>) => {
+            // 이미 북마크 되어 있는지 체크하고 북마크 상태 변경
+            state.boardArray[1].lists[0].movieList.push({ ...payload});
+        },
+
         addBookMarkBoard: (state, { payload }: PayloadAction<IMovieList>) => {
             // 이미 북마크 되어 있는지 체크하고 북마크 상태 변경
             const movieIndex = state.boardArray[2].lists[0].movieList.findIndex(movie => movie.movId === payload.movId);
@@ -144,5 +150,5 @@ const boardsSlice = createSlice({
     }
 })
 
-export const {setModalActive, addBookMarkBoard, removeBookMarkBoard} = boardsSlice.actions;
+export const {setModalActive, addBookMarkBoard, removeBookMarkBoard, addAwardsBoard} = boardsSlice.actions;
 export const boardsReducer = boardsSlice.reducer;

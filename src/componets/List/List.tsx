@@ -14,7 +14,7 @@ export const List: FC<TListProps> = ({
     list,
     onMovieClick
 }) => {
-    
+
     return (
         <div className={movie}>
             {list.movieList.map((mv) => (
@@ -22,7 +22,7 @@ export const List: FC<TListProps> = ({
                     key={mv.movId}
                     onClick={() => onMovieClick(list.listId, mv)}
                 >
-                    <Task //각각의 태스크 - 각각의 영화
+                    <Task // 각각의 영화
                         taskName={mv.movName}
                         taskDescription={mv.movDes}
                         taskImg={mv.movImg}

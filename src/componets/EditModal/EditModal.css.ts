@@ -18,7 +18,7 @@ export const modalWindow = style({
     height:'1000px',
     overflowY:"auto",
     backgroundColor:vars.color.mainDarker,
-    opacity:0.95,
+    opacity:0.97,
     borderRadius:14,
     padding:20,
     boxShadow:vars.shadow.basic,
@@ -75,20 +75,19 @@ export const input = style({
 
 export const set1 = style({
     borderRadius : '30px',
-    alignContent : 'center',
-    backgroundColor : vars.color.secondaryDarkTextHover,
+    backgroundColor : '#ffffff',
     width : '100%',
     height : '100%',
-    marginTop : '10px',
+    textAlign : 'center',
     alignItems:'center',
     color : "#808080",
     fontSize : vars.fontSizing.T3,
+    fontWeight:'bold',
 })
 
 export const set2 = style({
     display:'flex',
-    flexDirection : 'row',
-    marginBottom:"40px",   
+    flexDirection : 'row',   
 })
 
 
