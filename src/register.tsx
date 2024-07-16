@@ -19,9 +19,10 @@ const RegisterBox = () => {
         setPassword(e.target.value);
     }
 
+    {/*http://localhost:3000/users/join */ }
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        axios.post('http://localhost:3000/users/join',
+        axios.post('https://c3c9335f-3319-42eb-b423-b4566d6f90b6.mock.pstmn.io/users/join',
             {
                 username: username,
                 email: email,
@@ -32,7 +33,7 @@ const RegisterBox = () => {
             })
             .catch(function (error) {
                 console.log(error);
-            }); 
+            });
     }
 
 
@@ -45,7 +46,7 @@ const RegisterBox = () => {
                     <Link to="/" className={customHomeLink}>Home</Link>
                 </div>
             </div>
-            
+
             <div className={loginContainer}>
                 <div className={loginTitle2}>Register</div>
                 <form className={formContainer}>

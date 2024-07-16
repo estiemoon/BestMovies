@@ -40,9 +40,8 @@ const LoginBox = () => {
 
     const handleLoginBtn = async (e: React.FormEvent) => {
         e.preventDefault();
-
         try {
-            const response = await axios.post('http://localhost:3000/users/login',
+            const response = await axios.post('https://c3c9335f-3319-42eb-b423-b4566d6f90b6.mock.pstmn.io/users/login',
                 {
                     email: email,
                     password: password
@@ -56,6 +55,7 @@ const LoginBox = () => {
 
             setAccessToken(accessToken);
             setRefreshToken(refreshToken);
+            alert('로그인 성공')
 
         } catch (error) {
             console.log(error);
@@ -63,29 +63,23 @@ const LoginBox = () => {
     }
     return (
         <div>
-            {isLoggedIn ? ( //토큰이 있으면 자동 로그인
-                <div>
-                    {/* 로그인 인증이 가능해서 자동 로그인 된 상태 */}
-                </div>
-            ) : (
-                <div>
-                    <div className={boardContiner}>
-                        <div className={loginTitle}>BestMovie</div>
-                        <div className={customHomeLinkContainer}>
-                            <Link to="/" className={customHomeLink}>Home</Link>
-                        </div>
+            <div>
+                <div className={boardContiner}>
+                    <div className={loginTitle}>BestMovie</div>
+                    <div className={customHomeLinkContainer}>
+                        <Link to="/" className={customHomeLink}>Home</Link>
                     </div>
+                </div>
 
-                    <div className={loginContainer}>
-                        <div className={loginTitle2}>Login</div>
-                        <form className={formContainer}>
-                            <input className={boxContainer} onChange={getEmail} type="email" name="email" placeholder=" ID"></input>
-                            <input className={boxContainer} onChange={getPassword} type="password" name="password" placeholder=" PASSWORD"></input>
-                            <button className={boxContainer} onClick={handleLoginBtn} type="submit">로그인</button>
-                        </form>
-                    </div>
+                <div className={loginContainer}>
+                    <div className={loginTitle2}>Login</div>
+                    <form className={formContainer}>
+                        <input className={boxContainer} onChange={getEmail} type="email" name="email" placeholder=" ID"></input>
+                        <input className={boxContainer} onChange={getPassword} type="password" name="password" placeholder=" PASSWORD"></input>
+                        <button className={boxContainer} onClick={handleLoginBtn} type="submit">로그인</button>
+                    </form>
                 </div>
-            )}
+            </div>
         </div>
     );
 }
