@@ -5,7 +5,7 @@ const { createUser,
 const crypto = require('crypto');
 const {sign,refresh} = require('../middleware/jwt-utils');
 const { StatusCodes } = require('http-status-codes');
-
+ 
 
 const join = async (userInfo, res) => {
     try {
@@ -17,6 +17,11 @@ const join = async (userInfo, res) => {
                     VALUES (?, ?, ?, ?)`;
         const values = [email, salt, hashPwd, username];
         const result = await createUser(sql,values,res);
+        res.status(StatusCodes.CREATED).json({
+            "message" : "회원가입 성공",
+            "result": result
+        });
+
     } catch (err) {
         console.log("service_join", err);
         return res.status(StatusCodes.BAD_REQUEST).end();

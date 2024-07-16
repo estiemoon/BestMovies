@@ -13,7 +13,7 @@ module.exports = {
             },
             process.env.JWT_SECRET,
             {
-                expiresIn : '15 mins',
+                expiresIn : '30 mins',
                 issuer : 'moon'
             })
         },
@@ -31,13 +31,14 @@ module.exports = {
                 message: err.message
             };
         }
+        
     },
     refresh : () => {
         return jwt.sign(
             {},
             process.env.REFRESH_SECRET,
             {
-                expiresIn : '2 mins',
+                expiresIn : '1 days',
                 issuer : 'moon'
             })
     },
@@ -45,9 +46,9 @@ module.exports = {
         try {
             const sql = `SELECT refresh FROM users WHERE email = ? `
             const values = email 
-            const [refresh] = await getRefresh(sql,values); 
-            console.log("refresh",requestIdleCallbackefresh)
-            if(refresh == receivedRefresh) { 
+            const [result] = await getRefresh(sql,values); 
+     
+            if(result.refresh == receivedRefresh) { 
                 try{
                     const refreshResult = jwt.verify(receivedRefresh,process.env.REFRESH_SECRET);
                     console.log("refreshresult", refreshResult);
@@ -62,10 +63,14 @@ module.exports = {
                     }
                 }
             } else {
-                throw ReferenceError
+                throw new Error("refresh token이 일치하지 않습니다.");
             }
         } catch(err) {
-            return false;
+            console.log(err)
+            return {
+                ok :false,
+                message : err.message
+            }
         }
     }
 };

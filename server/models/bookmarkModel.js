@@ -1,6 +1,5 @@
 const conn = require('../db/mariadb');
 const {StatusCodes} = require('http-status-codes');
-//같은 (user-movie)있으면 x
 
 const alterBM = async (sql, values, res) => {
     try{
@@ -25,4 +24,4 @@ const getBM = async (sql, values, res) => {
 }
 
 
-module.exports = {alterBM,getBM}
+module.exports = {alterBM,getBM} 

@@ -1,6 +1,5 @@
  const {join,login} = require('../services/userService');
 
-
 const joinController = (req, res)=> {
     const {email, password, username} = req.body;
     userInfo = {email,password,username,};
@@ -13,5 +12,5 @@ const loginController = (req,res) => {
     login(userInfo,res);
 }
 
-
+ 
 module.exports = {joinController, loginController};
