@@ -87,13 +87,7 @@ const initialState : TBoardState = {
                     listId : 'list-0',
                     listName : '수상작 리스트',
                     movieList : [
-                        {
-                            movId : 'movie-0',
-                            movName : '기생충',
-                            movDes : '직업도 없이 허름한 반지하에 사는 기택 가족에게 돈을 벌 기회가 찾아온다. 친구의 소개로 부잣집 딸 다혜의 과외 선생님을 맡게 된 기택의 아들, 기우는 기대감에 부푼 채 글로벌 IT기업을 이끄는 박 사장의 저택에 들어간다.',
-                            movImg : parasite,
-                            bookmarked: false
-                        },
+                        
                         
                     ]
                 }
@@ -129,9 +123,9 @@ const boardsSlice = createSlice({
             //modalActive값을 전달받은 boolean 타입의 (payload)값으로 변경
         },
 
-        addMovieBoard: (state, { payload }: PayloadAction<IMovieList>) => {
-            // 이미 북마크 되어 있는지 체크하고 북마크 상태 변경
-            state.boardArray[0].lists[0].movieList.push({ ...payload});
+        addMovieBoard: (state, { payload }: PayloadAction<IMovieList[]>) => {
+            // 전체 영화 리스트를 추가
+            state.boardArray[0].lists[0].movieList = payload;
         },
 
         addAwardsBoard: (state, { payload }: PayloadAction<IMovieList>) => {
