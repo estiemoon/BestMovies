@@ -129,9 +129,9 @@ const boardsSlice = createSlice({
             //modalActive값을 전달받은 boolean 타입의 (payload)값으로 변경
         },
 
-        addMovieBoard: (state, { payload }: PayloadAction<IMovieList>) => {
-            // 이미 북마크 되어 있는지 체크하고 북마크 상태 변경
-            state.boardArray[0].lists[0].movieList.push({ ...payload});
+        addMovieBoard: (state, { payload }: PayloadAction<IMovieList[]>) => {
+            // 전체 영화 리스트를 추가
+            state.boardArray[0].lists[0].movieList = payload;
         },
 
         addAwardsBoard: (state, { payload }: PayloadAction<IMovieList>) => {

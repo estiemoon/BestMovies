@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { useTypedDispatch, useTypedSelector } from '../../hooks/redux';
 import { SideForm } from './SideForm/SideForm';
 import { addSection, boardItem, boardItemActive, container, customLink, loginBox, loginBox_container, title } from './BoardList.css';
@@ -18,6 +18,29 @@ export const BoardList: FC<TBoardListProps> = ({ activeBoardId, setActiveBoardId
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useTypedDispatch();
   const initialAccessToken = localStorage.getItem('accessToken');
+
+  const [filteredMovies, setFilteredMovies] = useState<IMovieList[]>([]);
+  const handleSearch = (searchText: string) => {
+    console.log('Search text:', searchText); // 디버깅
+    const boardZero = boardArray.find(board => board.boardId === 'board-0');
+    if (boardZero) {
+      const filtered = boardZero.lists.flatMap(list => list.movieList.filter(movie => {
+        // movName이 undefined일 때 빈 문자열로 처리
+        const movieName = movie.movName || '';
+        return movieName.toLowerCase().includes(searchText.toLowerCase());
+      }));
+      console.log('Filtered movies:', filtered); // 디버깅
+      setFilteredMovies(filtered);
+    } else {
+      setFilteredMovies([]);
+    }
+  }
+
+
+  const handleClearMovie = (movId: string) => {
+    const updatedMovies = filteredMovies.filter(movie => movie.movId !== movId);
+    setFilteredMovies(updatedMovies);
+  }
 
   useEffect(() => {
     if (activeBoardId === 'board-1') { // 수상작 선택 시
@@ -54,6 +77,20 @@ export const BoardList: FC<TBoardListProps> = ({ activeBoardId, setActiveBoardId
           dispatch(addBookMarkBoard(moviesToAdd));
         })
         .catch(error => console.error('Error fetching data:', error));
+    } else if (activeBoardId === 'board-0') { // 전체 영화인 경우
+      fetchMovieList()
+        .then(movieList => {
+          const formattedMovies = movieList.map((movie: any) => ({
+            movId: movie.id.toString(),
+            movName: movie.title,
+            movDes: movie.overview,
+            movImg: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
+            bookmarked: false
+          }));
+          console.log('Formatted Movies:', formattedMovies); // 디버깅
+          dispatch(addMovieBoard(formattedMovies));
+        })
+        .catch(error => console.error('Error fetching movies:', error));
     }
   }, [activeBoardId, dispatch, initialAccessToken]);
 
@@ -88,9 +125,9 @@ export const BoardList: FC<TBoardListProps> = ({ activeBoardId, setActiveBoardId
       <div className={addSection}>
         <SideForm
           inputRef={inputRef}
-          onSearch={() => { }}
-          filteredMovies={[]} // 필터링된 영화 목록 상태가 필요하지 않다면 빈 배열을 전달
-          onClearMovie={() => { }}
+          onSearch={handleSearch}
+          filteredMovies={filteredMovies}
+          onClearMovie={handleClearMovie}
         />
       </div>
     </div>
