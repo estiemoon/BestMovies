@@ -23,6 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 .env
-busan_awards.json
+img
 /node_modules
 Config.ts

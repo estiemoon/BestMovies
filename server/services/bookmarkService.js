@@ -4,7 +4,10 @@ const {StatusCodes} = require('http-status-codes');
 
 const showBM = async (userId, res) => {
     try{
-        const sql = `SELECT movie_id FROM bookmarks WHERE user_id = ?`;
+        const sql = `SELECT * FROM award_movies 
+                    WHERE id in 
+                    (SELECT movie_id FROM bookmarks WHERE user_id = ?)
+                    `;
         const values = [userId];
         await getBM(sql, values, res);
 
