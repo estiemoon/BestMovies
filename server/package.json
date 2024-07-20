@@ -17,6 +17,12 @@
   "author": "",
 
   "license": "ISC",
+  
+  "engines": {
+    
+    "node": "21.7.3"
+
+  },
 
   "dependencies": {
 
