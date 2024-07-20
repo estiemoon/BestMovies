@@ -32,7 +32,7 @@ const RegisterBox = () => {
             })
             .catch(function (error) {
                 console.log(error);
-            });
+            }); 
     }
 
 
@@ -45,7 +45,7 @@ const RegisterBox = () => {
                     <Link to="/" className={customHomeLink}>Home</Link>
                 </div>
             </div>
-
+            
             <div className={loginContainer}>
                 <div className={loginTitle2}>Register</div>
                 <form className={formContainer}>

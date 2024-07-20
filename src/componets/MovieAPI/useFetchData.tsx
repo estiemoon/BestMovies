@@ -1,18 +1,32 @@
-const TMDB_API_BASE_URL = 'https://api.themoviedb.org/3';
-const TMDB_API_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+import { useEffect, useState } from "react";
 
-export const fetchMovieList = async () => {
-  try {
-    console.log(TMDB_API_KEY)
-    const url = `${TMDB_API_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&language=ko-KR&sort_by=popularity.desc`;
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Failed to fetch movie list');
-    }
-    const data = await response.json();
-    return data.results;
-  } catch (error) {
-    console.error('Error fetching movie list:', error);
-    return [];
-  }
-};
+export const STATUS = {
+    pending: 'pending',
+    resolved: 'resolved',
+    error: 'error',
+  };
+  
+  const { pending, resolved, error } = STATUS;
+  
+  const useFetchData = (api) => {
+    const [status, setStatus] = useState(pending);
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus(pending);
+        try {
+          const response = await fetch(api);
+          const jsonData = await response.json();
+          setData(jsonData);
+          setStatus(resolved);
+        } catch (e) {
+        }
+      };
+  
+      fetchData(api);
+    }, []);
+  
+    return [status, data, error];
+  };

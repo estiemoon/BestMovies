@@ -2,30 +2,27 @@ import { style } from "@vanilla-extract/css";
 import { vars } from "../../App.css";
 
 export const wrapper = style({
-    display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  zIndex: 10000,
-  backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+    width:"100vw",
+    height:'100vh',
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
+    position:'absolute',
+    zIndex:10000
 })
 
 export const modalWindow = style({
-    display: 'flex',
-    flexDirection: 'column',
-    width: '900px',
-    height: '1000px',
-    overflowY: 'auto',
-    backgroundColor: vars.color.mainDarker,
-    opacity: 0.97,
-    borderRadius: 14,
-    padding: 20,
-    boxShadow: vars.shadow.basic,
-    color: vars.color.brightText,
+    display:'flex',
+    flexDirection:'column',
+    width:'900px',
+    height:'1000px',
+    overflowY:"auto",
+    backgroundColor:vars.color.mainDarker,
+    opacity:0.95,
+    borderRadius:14,
+    padding:20,
+    boxShadow:vars.shadow.basic,
+    color:vars.color.brightText
 })
 
 export const header = style({
@@ -78,19 +75,20 @@ export const input = style({
 
 export const set1 = style({
     borderRadius : '30px',
-    backgroundColor : '#ffffff',
+    alignContent : 'center',
+    backgroundColor : vars.color.secondaryDarkTextHover,
     width : '100%',
     height : '100%',
-    textAlign : 'center',
+    marginTop : '10px',
     alignItems:'center',
     color : "#808080",
     fontSize : vars.fontSizing.T3,
-    fontWeight:'bold',
 })
 
 export const set2 = style({
     display:'flex',
-    flexDirection : 'row',   
+    flexDirection : 'row',
+    marginBottom:"40px",   
 })
 
 

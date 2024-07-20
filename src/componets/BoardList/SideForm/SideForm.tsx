@@ -8,9 +8,9 @@ import { setModalActive } from '../../../store/slices/boardSlice';
 
 type TSideFormProps = {
   inputRef: React.RefObject<HTMLInputElement>;
-  onSearch: (searchText: string) => void;
+  onSearch: (searchText: string) => void; 
   filteredMovies: IMovieList[];
-  onClearMovie: (movId: string) => void;
+  onClearMovie: (movId: string) => void; 
 }
 
 export const SideForm: FC<TSideFormProps> = ({ inputRef, onSearch, filteredMovies, onClearMovie }) => {
@@ -23,7 +23,6 @@ export const SideForm: FC<TSideFormProps> = ({ inputRef, onSearch, filteredMovie
 
   const handleClick = () => {
     if (inputText) onSearch(inputText); // 검색 버튼 클릭 시 검색어 전달
-
   }
 
   const handleOpenModal = (movie: IMovieList) => {
