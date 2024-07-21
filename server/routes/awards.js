@@ -11,7 +11,7 @@ router.get('/',
     async (req,res) => {
         const { year, award } = req.query;
 
-        let sql = `SELECT * FROM award_movies`;
+        let sql = `SELECT (movie_id) FROM award_movies`;
         let values = [];
 
         if (year && award){
