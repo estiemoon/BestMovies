@@ -1,55 +1,37 @@
-import { useState,useEffect } from "react";
-import axios from "axios";
 
-interface Award {
-    id: number;
-    award_title: string;
-    title: string;
-    year: string;
-    winner : string;
-    award: string;
-  }
-  
-  const TestComponent: React.FC = () => {
-    const [data, setData] = useState<Award[] | null>(null);
+interface IMovie {
+  genre: string[];
+  movId: string;
+  movName: string;
+  movDes: string;
+  movImg: string;
+}
+interface TestComponentProps {
+  movies: IMovie[];
+}
 
-    const showMovies = async() => {
-        try{
-            await axios.get('http://localhost:3000/awards', {             
-                params: {
-                    year: 2023,
-                    award: 'cannes'
-                }
-            }).then((res) => {
-                console.log(res.data)
-                setData(res.data);
-            })
-        } catch (error){
-            console.error(error);
-        }
-    };
+const TestComponent: React.FC<TestComponentProps> = ({ 
+  movies,
+}) => {
 
-    useEffect(() => {
-      showMovies();
-    });
+  return (
+    <div>
+      {movies.map((mv) => (
+        <div key={mv.movId}>
+          <div>영화 아이디: {mv.movId}</div>
+          <div>장르: {mv.genre.join(', ')}</div>
+          <div>영화 제목: {mv.movName}</div>
+          <div>영화 설명: {mv.movDes}</div>
+          <div>
+            <img src={mv.movImg} alt={mv.movName} />
+          </div>
+        </div>
+      ))}
+    </div>
+  )
 
 
-  
-    return (
-      <div>
-        <button onClick={showMovies}>Show Movies</button>
-        <h1>Award Winning Movies:</h1>
-        {data && data.length > 0 ? (
-          <ul>
-            {data.map((award) => (
-              <li key={award.id}>{award.title} ({award.year})</li>
-            ))}
-          </ul>
-        ) : (
-          <div>No data available</div>
-        )}
-      </div>
-    );
-  };
-  
-  export default TestComponent;
+
+};
+
+export default TestComponent;

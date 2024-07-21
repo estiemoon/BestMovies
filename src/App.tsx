@@ -4,6 +4,7 @@ import { BoardList } from './componets/BoardList/BoardList'
 import { EditModal } from './componets/EditModal/EditModal';
 import { ListsContainer } from './componets/ListsContainer/ListsContainer';
 import { useTypedSelector } from './hooks/redux';
+import Movie from './componets/test/movie';
 
 function App() {
   //초기 board-0
@@ -20,6 +21,7 @@ function App() {
   
   return (
     <div>
+      <Movie/>
       <div className={appContainer}>
         {modalActive ? <EditModal/> : null} {/*modalActive가 true이면 EditModal */}
         <BoardList //상단 Board
