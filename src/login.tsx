@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { boardContiner, boxContainer, customHomeLink, customHomeLinkContainer, formContainer, loginContainer, loginText, loginTitle, loginTitle2 } from "./login.css";
 
 const LoginBox = () => {
@@ -11,6 +12,7 @@ const LoginBox = () => {
     const [accessToken, setAccessToken] = useState(initialAccessToken);
     const [refreshToken, setRefreshToken] = useState(localStorage.getItem('refreshToken'));
     const isLoggedIn = accessToken != null; //null이면 토큰 x
+    const navigate = useNavigate();
 
 
     const getEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +58,7 @@ const LoginBox = () => {
             setAccessToken(accessToken);
             setRefreshToken(refreshToken);
             alert('로그인 성공')
+            navigate('/')
 
         } catch (error) {
             console.log(error);

@@ -7,6 +7,8 @@ import { IList, IMovieList } from '../../types';
 import { Link } from "react-router-dom";
 import { addAwardsBoard, addBookMarkBoard, addMovieBoard } from '../../store/slices/boardSlice';
 import { fetchMovieList } from '../MovieAPI/useFetchData';
+import { useAward } from '../../hooks/useAward';
+import { MovieDetail } from '../MovieAPI/movieDetail.api';
 
 type TBoardListProps = {
   activeBoardId: string;
@@ -41,22 +43,47 @@ export const BoardList: FC<TBoardListProps> = ({ activeBoardId, setActiveBoardId
     const updatedMovies = filteredMovies.filter(movie => movie.movId !== movId);
     setFilteredMovies(updatedMovies);
   }
+  const {idList} = useAward(); //수상작 연결할 아이디 리스트
 
   useEffect(() => {
     if (activeBoardId === 'board-1') { // 수상작 선택 시
-      fetch('http://localhost:3000/awards')
-        .then(response => response.json())
-        .then(data => {
-          const moviesToAdd = data.map((award: { id: any; title: any; detail: any; img: any; }) => ({
-            movId: award.id,
-            movName: award.title,
-            movDes: award.detail,
-            movImg: award.img,
-            bookmarked: false
-          }));
-          dispatch(addAwardsBoard(moviesToAdd));
+      console.log('board-1')
+      idList?.map((movie :{movie_id : number}) =>  {
+        (async () => {
+          console.log('여기서부터 실행이 안됩니다.')
+            try {
+                const mv = await MovieDetail(movie.movie_id);
+                console.log('비동기',  mv)
+                if (mv) {
+                  const mvFormat = {
+                    movId : mv.id,
+                    movName: mv.title,
+                    movDes: mv.overview,
+                    movImg: `https://image.tmdb.org/t/p/w500/${mv.poster_path}`,
+                    bookmarked: false,
+                };
+                  dispatch(addAwardsBoard(mvFormat));
+                }
+            } catch (error) {
+                console.error('Error fetching movies:', error);
+            }
+          })();
         })
-        .catch(error => console.error('Error fetching data:', error));
+      console.log(boardArray[1].lists[0].movieList)
+
+      // fetch('http://localhost:3000/awards')
+      //   .then(response => response.json())
+      //   .then(data => {
+      //     const moviesToAdd = data.map((award: { id: any; title: any; detail: any; img: any; }) => ({
+      //       movId: award.id,
+      //       movName: award.title,
+      //       movDes: award.detail,
+      //       movImg: award.img,
+      //       bookmarked: false
+      //     }));
+      //     dispatch(addAwardsBoard(moviesToAdd));
+      //   })
+      //   .catch(error => console.error('Error fetching data:', error));
     } else if (activeBoardId === 'board-2') { // 즐겨찾기 선택 시
       fetch('http://localhost:3000/booklist', {
         method: 'GET',
@@ -77,6 +104,7 @@ export const BoardList: FC<TBoardListProps> = ({ activeBoardId, setActiveBoardId
           dispatch(addBookMarkBoard(moviesToAdd));
         })
         .catch(error => console.error('Error fetching data:', error));
+
     } else if (activeBoardId === 'board-0') { // 전체 영화인 경우
       fetchMovieList()
         .then(movieList => {

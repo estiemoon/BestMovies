@@ -1,4 +1,3 @@
-
 interface IMovie {
   genre: string[];
   movId: string;
@@ -8,12 +7,11 @@ interface IMovie {
 }
 interface TestComponentProps {
   movies: IMovie[];
-}
+} 
 
-const TestComponent: React.FC<TestComponentProps> = ({ 
+const AwardMovieDetail: React.FC<TestComponentProps> = ({ 
   movies,
 }) => {
-
   return (
     <div>
       {movies.map((mv) => (
@@ -29,9 +27,6 @@ const TestComponent: React.FC<TestComponentProps> = ({
       ))}
     </div>
   )
-
-
-
 };
 
-export default TestComponent;
+export default AwardMovieDetail;
