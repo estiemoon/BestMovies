@@ -11,48 +11,47 @@
 ```mermaid
 erDiagram
 
-    USER ||--o{ BOOKMARK : ""
-    USER ||--o{ REVIEW : ""
-    MOVIE ||--o{ BOOKMARK : ""
-    MOVIE ||--o{ REVIEW : ""
+USER ||--o{ BOOKMARK : ""
+USER ||--o{ REVIEW : ""
+MOVIE_OPENAPI ||--o{ BOOKMARK : ""
+MOVIE_OPENAPI ||--o{ REVIEW : ""
 
-    USER {
-        id integer PK
-        username varchar
-        email varchar
-        salt varchar
-        hashPwd varchar
-        refresh varchar
-    }
+USER {
+    id integer PK
+    username varchar
+    email varchar
+    salt varchar
+    hashPwd varchar
+    refresh varchar
+}
 
-    AWARD_MOVIE {
-        id integer PK
-        award_title varchar
-        title varchar
-        year integer
-        winner varchar
-        award varchar
-        movie_id integer
-    }
+AWARD_MOVIE {
+    id integer PK
+    award_title varchar
+    title varchar
+    year integer
+    winner varchar
+    award varchar
+    movie_id integer
+}
 
-    MOVIE {
-        id integer PK
-    }
+MOVIE_OPENAPI {
+    id integer 
+}
 
-    BOOKMARK {
-        id integer PK
-        user_id integer FK
-        movie_id integer FK
-    }
+BOOKMARK {
+    id integer PK
+    user_id integer FK
+    movie_id integer FK
+}
 
-    REVIEW {
-        id integer PK
-        user_id integer FK
-        movie_id integer FK
-        comments varchar
-        rate integer
-    }
-
+REVIEW {
+    id integer PK
+    user_id integer FK
+    movie_id integer FK
+    comments varchar
+    rate integer
+}
 
 
 ```
@@ -67,8 +66,17 @@ erDiagram
 |  | GET |
 | --- | --- |
 |  | '/awards' |
-| Query | {year, award} |
-| Response Body |  [ {"id": 1, "award_title": "황금종려상", "title": "아노라", "year": 2024,"winner": "션 베이커","award": "cannes", "movie_id": 1064213},...] |
+| Response Body | 
+    [
+     {
+         "movie_id": 915935
+     },
+    {
+        "movie_id": 467244
+    },
+    {
+        "movie_id": 964960
+    },|
 
 ## **USER API**
 
@@ -139,12 +147,11 @@ req.headers.refresh; //현재 refresh token |
 
 |  | DELETE |
 | --- | --- |
-|  | '/bookmarks' |
+|  | '/bookmarks/:movie_id' |
 | Header | Authorization : access_token |
-| Request Body |  {movie_id} |
 | Response Body | res.json({message : "북마크 삭제 성공!",user : req.user.email,movie: movie_id,result : result,}) |
 
-개별 영화 좋아요 조회
+개별 영화 좋아요 조회 (유저의)
 
 |  | GET |
 | --- | --- |
@@ -168,9 +175,8 @@ req.headers.refresh; //현재 refresh token |
 
 |  | DELETE |
 | --- | --- |
-|  | '/reviews' |
+|  | '/reviews/:movie_id' |
 | Header | Authorization : access_token |
-| Request Body |  |
 | Response Body | {message : "리뷰 삭제 성공!", user : req.user.email, movie: movie_id, result : result} |
 
 유저 개별 영화 리뷰 및 평점 수정

@@ -55,7 +55,8 @@ const removeReviewController = async (req,res) => {
     } else {
         const {movie_id} = req.body
         try {
-            const values = [req.user.email, movie_id]
+            const {movie_id} = req.params
+            const values = [req.user.email,movie_id]
             const result = await removeReview(values, res)
             res.res.status(StatusCodes.OK).json({
                 message : "리뷰 삭제 성공!",
@@ -72,7 +73,7 @@ const removeReviewController = async (req,res) => {
 
 const showReviewController = async (req,res) => {
 
-    const movie_id = req.params.id
+    const movie_id = req.params.movie_id
     try {
         const values = [movie_id]
         await showReview(values, res)

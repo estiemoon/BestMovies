@@ -44,7 +44,7 @@ const removeBMController = async (req,res) => {
             message : "로그인이 필요합니다."
         })
     } else {
-        const {movie_id} = req.body
+        const {movie_id} = req.params;
         try{
             const result = await removeBM(req.user.email, movie_id, res)
             res.status(StatusCodes.OK).json({
