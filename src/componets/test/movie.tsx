@@ -1,11 +1,7 @@
 import { FC, useEffect, useState } from 'react';
-import TestComponent from './test';
 import getMovieDetail from './getMovieDetail';
-import axios from "axios";
-
-interface Award {
-    movie_id : number;
-  }
+import { useAward } from '../../hooks/useAward';
+import AwardMovieDetail from '../test/test'
 
 interface IMovie {
     movId : string,
@@ -17,28 +13,8 @@ interface IMovie {
 }
 
 export const Movie: FC = () => {
-    const [idList, setIdList] = useState<Award[] | null>(null);
+    const {idList} = useAward();
     const [movies, setMovies] = useState<IMovie[]>([]);
-
-    useEffect(() => {
-        const showMovies = async() => {
-            try{
-                await axios.get('http://localhost:3000/awards', {             
-                    params: {
-                        year: 2023,
-                        award: 'cannes'
-                    }
-                }).then((res) => {
-                    console.log("db에서 수상작 받아오기", res.data)
-                    setIdList(res.data);
-                })
-            } catch (error){
-                console.error(error);
-            }
-        };
-        showMovies();
-    }, []);
-
 //DB 없으니까 이 정보로 테스트 해볼 것
 //    IdList = [
 //      {
@@ -96,7 +72,6 @@ export const Movie: FC = () => {
 //         "movie_id": 960033
 //     }
 // ]
-
     useEffect(() => {
         idList?.map((movie) => {
             const fetchMovies = async () => {
@@ -124,14 +99,12 @@ export const Movie: FC = () => {
         })
     }, [idList]);
 
-    console.log("testcomponent 전 ",movies)
-
     return (
         <>
         <div>
             {(movies) ?
-                    <TestComponent movies = {movies}/>
-                        : <div>받아온 영화가 존재하지 않습니다.</div>
+                <AwardMovieDetail movies = {movies} />
+                : <div>받아온 영화가 존재하지 않습니다.</div>
             }
         </div>
         </>

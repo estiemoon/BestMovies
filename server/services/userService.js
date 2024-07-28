@@ -40,7 +40,8 @@ const login = async (userInfo,res) => {
 
         if (user) {
             const getHashPwd = crypto.pbkdf2Sync(password, user.salt, 100000, 64, 'sha512').toString('base64');
-            if(user.hashPwd == getHashPwd) {
+            
+            if(user.hashPwd == getHashPwd) { 
                 const token = sign(user);
                 const refreshToken = refresh();
                 res.cookie('refresh', refreshToken,{httpOnly : true});
@@ -49,7 +50,8 @@ const login = async (userInfo,res) => {
                 const values = [refreshToken, user.email];
                 const createRefresh = await addRefresh(sql,values,res);
 
-                res.status(200).json({
+
+                res.status(StatusCodes.OK).json({
                     token : token,
                     refresh : createRefresh,
                     message : 'Login success'

@@ -21,7 +21,6 @@ function App() {
   
   return (
     <div>
-      <Movie/>
       <div className={appContainer}>
         {modalActive ? <EditModal/> : null} {/*modalActive가 true이면 EditModal */}
         <BoardList //상단 Board
