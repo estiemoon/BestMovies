@@ -29,9 +29,10 @@ erDiagram
         id integer PK
         award_title varchar
         title varchar
-        year varchar
+        year integer
         winner varchar
         award varchar
+        movie_id integer
     }
 
     MOVIE {
@@ -67,7 +68,7 @@ erDiagram
 | --- | --- |
 |  | '/awards' |
 | Query | {year, award} |
-| Response Body |  [{ "id": 1, "award_title": "황금종려상", "title": "아노라", "year": "2024", "winner": "션 베이커", "award": "cannes",“img” : “img-name”,“detail” : “detail…..”},{ }, …] |
+| Response Body |  [ {"id": 1, "award_title": "황금종려상", "title": "아노라", "year": 2024,"winner": "션 베이커","award": "cannes", "movie_id": 1064213},...] |
 
 ## **USER API**
 
@@ -161,7 +162,7 @@ req.headers.refresh; //현재 refresh token |
 |  | '/reviews' |
 | Header | Authorization : access_token |
 | Request Body | {"movie_id" : 3,"content": "good","rating" : 4} |
-| Response Body | {"message": "리뷰 추가 성공!","user": "mailto:moon@mail.com","movie": 3,"result": result} |
+| Response Body | {"message": "리뷰 추가 성공!","user": "mailto:moon@mail.com","movie": movie_id,"result": result} |
 
 개별 영화 리뷰 및 평점 삭제
 
