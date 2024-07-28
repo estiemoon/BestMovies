@@ -22,11 +22,7 @@ router.post('/',
             ensureAuthorization, 
             addBMController);
 
-router.delete('/', 
-            [
-                body('movie_id').notEmpty().isInt().withMessage('movie_id must be an integer'),
-                validFunc
-            ],
+router.delete('/:movie_id', 
             ensureAuthorization, 
             removeBMController)
 

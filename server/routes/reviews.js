@@ -12,9 +12,9 @@ const {
     changeReviewController
                             } = require('../controllers/reviewController');
 
-router.get('/:id',
+router.get('/:movie_id',
             [
-                param('id').notEmpty().withMessage('movie_id params가 필요합니다'),
+                param('movie_id').notEmpty().withMessage('movie_id params가 필요합니다'),
             ],
             showReviewController);
 
@@ -28,9 +28,9 @@ router.post('/',
             ensureAuthorization, 
             addReviewController);
 
-router.delete('/', 
+router.delete('/:movie_id', 
             [
-                body('movie_id').notEmpty().isInt().withMessage('movie_id must be an integer'),
+                param('movie_id').notEmpty().isInt().withMessage('movie_id must be an integer'),
                 validFunc
             ],
             ensureAuthorization, 
