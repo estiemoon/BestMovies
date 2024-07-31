@@ -86,20 +86,30 @@ export const set1 = style({
     color : "#808080",
     fontSize : vars.fontSizing.T3,
     fontWeight:'bold',
+    overflowY : 'auto',
+    msOverflowStyle:'none',
+    scrollbarWidth:'none',
+
 })
 
 export const set2 = style({
     display:'flex',
-    flexDirection : 'row',   
+    flexDirection : 'row',
+    margin : '10px',
+    alignContent:'center',
+    width : '100%',
+    height : '50%',
+    marginBottom : '40px'
 })
 
-
 export const edit = style({
-    width:"50%",
-    height:'80%',
     margin :'10px',
     fontSize : vars.fontSizing.T3,
     color : '#ffffff',
     fontWeight:'bold',
+})
+
+export const imageEdit = style({
+    borderRadius : '20px'
 })
 

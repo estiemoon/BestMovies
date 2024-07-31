@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { FiX } from 'react-icons/fi';
 import { useTypedDispatch, useTypedSelector } from '../../hooks/redux';
 import { addBookMarkBoard, removeBookMarkBoard, setModalActive } from '../../store/slices/boardSlice';
-import { bookmarkImage, closeButton, edit, header, modalWindow, set1, set2, title, wrapper } from './EditModal.css'; // 스타일 import
+import { bookmarkImage, closeButton, edit, header, imageEdit, modalWindow, set1, set2, title, wrapper } from './EditModal.css'; // 스타일 import
 import { FaBookmark } from 'react-icons/fa6';
 import { FaPlus } from "react-icons/fa";
 import { IMovieList } from '../../types';
+import { ReviewBoard } from '../ReviewBoard/ReviewBoard';
 
 export const EditModal = () => {
   const dispatch = useTypedDispatch();
@@ -101,11 +102,15 @@ export const EditModal = () => {
           )}
           <FiX className={closeButton} onClick={handleCloseButton} />
         </div>
+
         <div className={set2}>
-          <img className={edit} src={data.movieModal.movImg} alt={data.movieModal.movName} />
+          <img className={imageEdit} src={data.movieModal.movImg} alt={data.movieModal.movName} />
           <div className={edit}>{data.movieModal.movDes}</div>
         </div>
-        <div className={set1}> Reviews </div>
+
+        <div className={set1}>
+          <ReviewBoard movieId={data.movieModal.movId} />
+        </div>
       </div>
     </div>
   );
